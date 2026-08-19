@@ -1,0 +1,41 @@
+import java.util.*;
+class Node{
+int data;
+Node left,right;
+Node(int data){
+this.data=data;
+left=right=null;
+}
+}
+class BST14{
+Node insert(Node root,int key){
+if(root==null)
+return new Node(key);
+if(key<root.data)
+root.left=insert(root.left,key);
+else if(key>root.data)
+root.right=insert(root.right,key);
+return root;
+}
+int BST14(Node root){
+if(root==null)
+return 0;
+int count=0;
+if(root.left==null&&root.right==null)
+count++;
+count+=BST14(root.left);
+count+=BST14(root.right);
+return count;
+}
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+BST14 obj=new BST14();
+Node root=null;
+System.out.println("Enter number of nodes:");
+int n=sc.nextInt();
+System.out.println("Enter "+n+" elements:");
+for(int i=0;i<n;i++)
+root=obj.insert(root,sc.nextInt());
+System.out.println("Leaf count using Preorder: "+obj.BST14(root));
+}
+}
